@@ -25,7 +25,7 @@ class Snake:
         self.dirc = (self.dirc + relativeDirection + 4) % 4
 
     def move(self):
-        x, y = self.nextStepPos(self.direction)
+        x, y = self.nextStepPos(self.dirc)
         del self.body[-1]
 
         if self.__legal(x, y):
@@ -35,7 +35,7 @@ class Snake:
             return False
 
     def extend(self):
-        x, y = self.nextStepPos(self.direction)
+        x, y = self.nextStepPos(self.dirc)
 
         if self.__legal(x, y):
             self.body.insert(0, {'x': x, 'y': y})

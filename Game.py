@@ -1,9 +1,9 @@
-import Snake
-import Food
+from Snake import Snake
+from Food import Food
 
 class Game:
     def __init__(self, screen = None):
-        self.screen = None
+        self.screen = screen
         self.snake = Snake()
         self.food = Food(self.snake)
 
