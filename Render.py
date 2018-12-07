@@ -12,7 +12,7 @@ class Render:
         self.height = configs.HEIGHT
 
     def background(self):
-        if (self.screen == None):
+        if self.screen == None:
             return
 
         topRect = pygame.Rect(0, 0, self.width + self.boundSize * 2, self.boundSize)
@@ -27,9 +27,24 @@ class Render:
         gridRect = pygame.Rect(self.boundSize, self.boundSize, self.width, self.height)
         pygame.draw.rect(self.screen, configs.GRID_COLOR, gridRect)
 
+    def food(self, x, y):
+        self.grid(x, y, configs.FOOD_COLOR)
+
+    def snakeBody(self, x, y):
+        self.grid(x, y, configs.BODY_COLOR)
+
+    def snakeHead(self, x, y):
+        self.grid(x, y, configs.SNAKE_COLOR)
+
+    def null(self, x, y):
+        self.grid(x, y, configs.GRID_COLOR)
+
     def grid(self, x, y, color):
-        if (self.screen == None):
+        if self.screen == None or not self.legal(x, y):
             return
 
         area = pygame.Rect(self.pixelSize * x + self.boundSize, self.pixelSize * y, self.pixelSize, self.pixelSize)
-        pygame.draw.rect(self.screen, area)
+        pygame.draw.rect(self.screen, area, color)
+
+    def legal(self, x, y):
+        return 0 <= x < self.width and 0 <= y < self.height

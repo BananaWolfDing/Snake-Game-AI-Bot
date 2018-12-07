@@ -21,5 +21,6 @@ WIN_HEIGHT = HEIGHT * PIXEL_SIZE + BOUND_SIZE * 2
 # Color Settings
 GRID_COLOR = (255, 255, 255) # White
 SNAKE_COLOR = (255, 0, 0) # Red
+BODY_COLOR = (0, 0, 255) # Blue
 FOOD_COLOR = (0, 0, 0) # Black
 BOUND_COLOR = (180, 180, 180) # Gray

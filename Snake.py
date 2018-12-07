@@ -16,13 +16,22 @@ class Snake:
     def getDirection(self):
         return self.dirc
 
-    def nextStepPos(self, direction):
-        x = self.body[0]['x'] + stdMove[direction][0]
-        y = self.body[0]['y'] + stdMove[direction][1]
+    def getHead(self):
+        return self.body[0]['x'], self.body[0]['y']
+
+    def getTail(self):
+        return self.body[-1]['x'], self.body[-1]['y']
+
+    def nextStepPos(self, ):
+        x = self.body[0]['x'] + stdMove[self.dirc][0]
+        y = self.body[0]['y'] + stdMove[self.dirc][1]
         return x, y
 
     def changeDirection(self, relativeDirection):
         self.dirc = (self.dirc + relativeDirection + 4) % 4
+
+    def win(self):
+        return self.length() >= self.gridWidth * self.gridHeight
 
     def move(self):
         x, y = self.nextStepPos(self.dirc)
