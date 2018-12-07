@@ -16,7 +16,7 @@ class Game:
 
     def moveByRelativeDirection(self, direction):
         absDirc = (self.snake.getDirection() + direction + 4) % 4
-        self.moveByAbsoluteDirection(absDirc)
+        return self.moveByAbsoluteDirection(absDirc)
 
     def moveByAbsoluteDirection(self, direction):
         if (direction - self.snake.getDirection() + 4) % 4 == 2:
