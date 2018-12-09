@@ -8,11 +8,11 @@ class Game:
         self.snake = Snake()
         self.food = Food(self.snake)
         self.render = Render(screen)
-        Render.background()
-        x, y = Food.getFood()
-        Render.food(x, y)
-        x, y = Snake.getHead()
-        Render.snakeHead(x, y)
+        self.render.background()
+        x, y = self.food.getFood()
+        self.render.food(x, y)
+        x, y = self.snake.getHead()
+        self.render.snakeHead(x, y)
 
     def moveByRelativeDirection(self, direction):
         absDirc = (self.snake.getDirection() + direction + 4) % 4
@@ -26,23 +26,26 @@ class Game:
         x, y = self.snake.nextStepPos()
         if (x == self.food.x) and (y == self.food.y):
             x, y = self.snake.getHead()
-            Render.snakeBody(x, y)
+            self.render.snakeBody(x, y)
 
             res = self.snake.extend()
 
             x, y = self.snake.getHead()
-            Render.snakeHead(x, y)
+            self.render.snakeHead(x, y)
             self.food.randFood(self.snake)
+            x, y = self.food.getFood()
+            self.render.food(x, y)
         else:
             x, y = self.snake.getHead()
             s, t = self.snake.getTail()
-            Render.snakeBody(x, y)
+            self.render.snakeBody(x, y)
 
             res = self.snake.move()
-            x, y = self.snake.getHead()
-            Render.snakeHead(x, y)
-            Render.null(s, t)
+            if res:
+                x, y = self.snake.getHead()
+                self.render.snakeHead(x, y)
+                self.render.null(s, t)
 
         observe = None
         reward = None
-        return observe, reward, len, res
+        return observe, reward, len, not res

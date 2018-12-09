@@ -22,19 +22,22 @@ class Snake:
     def getTail(self):
         return self.body[-1]['x'], self.body[-1]['y']
 
-    def nextStepPos(self, ):
+    def nextStepPos(self):
         x = self.body[0]['x'] + stdMove[self.dirc][0]
         y = self.body[0]['y'] + stdMove[self.dirc][1]
         return x, y
 
-    def changeDirection(self, relativeDirection):
-        self.dirc = (self.dirc + relativeDirection + 4) % 4
+    def changeDirection(self, direction):
+        if (self.dirc - direction + 4) % 4 == 2:
+            return
+        else:
+            self.dirc = direction
 
-    def win(self):
+    def won(self):
         return self.length() >= self.gridWidth * self.gridHeight
 
     def move(self):
-        x, y = self.nextStepPos(self.dirc)
+        x, y = self.nextStepPos()
         del self.body[-1]
 
         if self.__legal(x, y):
@@ -44,7 +47,7 @@ class Snake:
             return False
 
     def extend(self):
-        x, y = self.nextStepPos(self.dirc)
+        x, y = self.nextStepPos()
 
         if self.__legal(x, y):
             self.body.insert(0, {'x': x, 'y': y})
@@ -58,8 +61,8 @@ class Snake:
         for component in self.body:
             if component['x'] == x and component['y'] == y:
                 return True
-            else:
-                return False
+
+        return False
 
     def __legal(self, x, y):
         if x < 0 or y < 0 or x >= self.gridWidth or y >= self.gridHeight:

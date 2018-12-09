@@ -14,17 +14,10 @@ class Render:
     def background(self):
         if self.screen == None:
             return
+        boundRect = pygame.Rect(0, 0, self.winWidth, self.winHeight)
+        pygame.draw.rect(self.screen, configs.BOUND_COLOR, boundRect)
 
-        topRect = pygame.Rect(0, 0, self.width + self.boundSize * 2, self.boundSize)
-        botRect = pygame.Rect(0, self.height + self.boundSize, self.width + 2 * self.boundSize, self.boundSize)
-        lefRect = pygame.Rect(0, 0, self.boundSize, self.height + 2 * self.boundSize)
-        rigRect = pygame.Rect(self.width + self.boundSize, 0, self.boundSize, self.height + 2 * self.boundSize)
-        pygame.draw.rect(self.screen, configs.BOUND_COLOR, topRect)
-        pygame.draw.rect(self.screen, configs.BOUND_COLOR, botRect)
-        pygame.draw.rect(self.screen, configs.BOUND_COLOR, lefRect)
-        pygame.draw.rect(self.screen, configs.BOUND_COLOR, rigRect)
-
-        gridRect = pygame.Rect(self.boundSize, self.boundSize, self.width, self.height)
+        gridRect = pygame.Rect(self.boundSize, self.boundSize, self.width * self.pixelSize, self.height * self.pixelSize)
         pygame.draw.rect(self.screen, configs.GRID_COLOR, gridRect)
 
     def food(self, x, y):
@@ -43,8 +36,8 @@ class Render:
         if self.screen == None or not self.legal(x, y):
             return
 
-        area = pygame.Rect(self.pixelSize * x + self.boundSize, self.pixelSize * y, self.pixelSize, self.pixelSize)
-        pygame.draw.rect(self.screen, area, color)
+        area = pygame.Rect(self.pixelSize * x + self.boundSize, self.pixelSize * y + self.boundSize, self.pixelSize, self.pixelSize)
+        pygame.draw.rect(self.screen, color, area)
 
     def legal(self, x, y):
         return 0 <= x < self.width and 0 <= y < self.height

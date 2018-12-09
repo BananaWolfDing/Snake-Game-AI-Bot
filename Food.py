@@ -11,7 +11,7 @@ class Food:
             raise Exception(err)
 
     def randFood(self, snake):
-        if snake.win():
+        if snake.won():
             raise Exception("Grid is full")
 
         while True:
