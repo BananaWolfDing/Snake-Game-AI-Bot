@@ -1,6 +1,7 @@
 from Snake import Snake
 from Food import Food
 from Render import Render
+from Observer import Observer
 
 class Game:
     def __init__(self, screen = None):
@@ -13,6 +14,7 @@ class Game:
         self.render.food(x, y)
         x, y = self.snake.getHead()
         self.render.snakeHead(x, y)
+        self.Observer = Observer(self.snake, self.food)
 
     def moveByRelativeDirection(self, direction):
         absDirc = (self.snake.getDirection() + direction + 4) % 4
@@ -23,6 +25,7 @@ class Game:
             direction = (direction + 4) % 2
         self.snake.changeDirection(direction)
 
+        reward = 1
         x, y = self.snake.nextStepPos()
         if (x == self.food.x) and (y == self.food.y):
             x, y = self.snake.getHead()
@@ -35,6 +38,7 @@ class Game:
             self.food.randFood(self.snake)
             x, y = self.food.getFood()
             self.render.food(x, y)
+            reward = 10
         else:
             x, y = self.snake.getHead()
             s, t = self.snake.getTail()
@@ -46,6 +50,6 @@ class Game:
                 self.render.snakeHead(x, y)
                 self.render.null(s, t)
 
-        observe = None
-        reward = None
+
+        observe = self.Observer.observe()
         return observe, reward, len, not res

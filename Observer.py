@@ -44,14 +44,17 @@ class Observer:
         l = (self.snake.getDirection() + 3) % 4
         f = self.snake.getDirection()
         r = (self.snake.getDirection() + 1) % 4
-        return self.explorer(l), self.explorer(f), self.explorer(r)
+        return self.__explorer(l), self.__explorer(f), self.__explorer(r)
 
-    def explorer(self, dirction):
+    def __explorer(self, dirction):
         x, y = self.snake.getHead()
-        step = 0
+        step = 1
         while (self.snake.legal(x + stdMove[dirction][0], y + stdMove[dirction][1])):
             x += stdMove[dirction][0]
             y += stdMove[dirction][1]
             step += 1
 
         return step
+
+    def observe(self):
+        return [self.foodDist(), self.wallDist(), self.selfDist()]
