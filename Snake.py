@@ -40,7 +40,7 @@ class Snake:
         x, y = self.nextStepPos()
         del self.body[-1]
 
-        if self.__legal(x, y):
+        if self.legal(x, y):
             self.body.insert(0, {'x': x, 'y': y})
             return True
         else:
@@ -49,7 +49,7 @@ class Snake:
     def extend(self):
         x, y = self.nextStepPos()
 
-        if self.__legal(x, y):
+        if self.legal(x, y):
             self.body.insert(0, {'x': x, 'y': y})
             if self.length() == self.gridWidth * self.gridHeight:
                 self.win = True
@@ -64,7 +64,7 @@ class Snake:
 
         return False
 
-    def __legal(self, x, y):
+    def legal(self, x, y):
         if x < 0 or y < 0 or x >= self.gridWidth or y >= self.gridHeight:
             return False
 

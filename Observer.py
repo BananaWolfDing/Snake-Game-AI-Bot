@@ -1,6 +1,8 @@
 from Snake import Snake
 import configs
 
+stdMove = [[0, -1], [1, 0], [0, 1], [-1, 0]]
+
 class Observer:
     def __init__(self, snake, food, width = configs.WIDTH, height = configs.HEIGHT):
         self.snake = snake
@@ -39,4 +41,17 @@ class Observer:
             return y, x, h - y
 
     def selfDist(self):
-        return # To be finished
+        l = (self.snake.getDirection() + 3) % 4
+        f = self.snake.getDirection()
+        r = (self.snake.getDirection() + 1) % 4
+        return self.explorer(l), self.explorer(f), self.explorer(r)
+
+    def explorer(self, dirction):
+        x, y = self.snake.getHead()
+        step = 0
+        while (self.snake.legal(x + stdMove[dirction][0], y + stdMove[dirction][1])):
+            x += stdMove[dirction][0]
+            y += stdMove[dirction][1]
+            step += 1
+
+        return step
