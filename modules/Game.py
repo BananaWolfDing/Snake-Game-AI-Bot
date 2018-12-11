@@ -1,8 +1,8 @@
-import LearningConfigs
-from Snake import Snake
-from Food import Food
-from Render import Render
-from Observer import Observer
+from configs import LearningConfigs
+from modules.Snake import Snake
+from modules.Food import Food
+from modules.Render import Render
+from modules.Observer import Observer
 
 class Game:
     def __init__(self, screen = None):

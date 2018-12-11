@@ -1,4 +1,4 @@
-import configs
+from configs import configs
 
 stdMove = [[0, -1], [1, 0], [0, 1], [-1, 0]]
 

@@ -1,5 +1,6 @@
 import random
-import configs
+from configs import configs
+
 
 class Food:
     def __init__(self, snake, width = configs.WIDTH, height = configs.HEIGHT, ):
