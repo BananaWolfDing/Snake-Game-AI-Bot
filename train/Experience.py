@@ -47,3 +47,8 @@ class ERM:
             return [0, 1, 0]
         elif x == 1:
             return [0, 0, 1]
+
+if __name__ == "__main__":
+    erm = ERM()
+    data = erm.generateTrainingData()
+    erm.saveData(data)
