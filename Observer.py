@@ -10,6 +10,10 @@ class Observer:
         self.width = width
         self.height = height
 
+    def towardsFood(self):
+        x, y = self.foodDist()
+        return y > 0
+
     def foodDist(self):
         dirc = self.snake.dirc
         x, y = self.snake.getHead()

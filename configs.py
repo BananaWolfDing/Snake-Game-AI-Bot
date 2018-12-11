@@ -1,5 +1,5 @@
 # Game Speed Settings
-GAME_FPS = 1
+GAME_FPS = 15
 
 # Grid Settings
 WIDTH = 20

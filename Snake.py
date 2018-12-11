@@ -8,7 +8,7 @@ class Snake:
         self.gridHeight = configs.HEIGHT
         self.dirc = configs.DIRECTION
         self.win = None
-        self.body = configs.START_BODY
+        self.body = list(configs.START_BODY)
 
     def length(self):
         return len(self.body)
