@@ -4,8 +4,12 @@ EAT_FOOD = 10
 TO_FOOD = 1
 
 # Experience Replay Mechanism
-SAMPLE_SIZE = 1000
+SAMPLE_SIZE = 5000
 AIM_SCORE = 500
 
 # Training Data Save and Load
 DATA_PATH = "../data/training_data.pkl"
+
+# Training parameter
+LEARNING_RATE = 0.01
+BATCH = 500

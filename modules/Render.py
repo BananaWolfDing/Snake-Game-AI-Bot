@@ -13,7 +13,7 @@ class Render:
         self.height = configs.HEIGHT
 
     def background(self):
-        if self.screen == None:
+        if self.screen is None:
             return
         boundRect = pygame.Rect(0, 0, self.winWidth, self.winHeight)
         pygame.draw.rect(self.screen, configs.BOUND_COLOR, boundRect)
@@ -34,7 +34,7 @@ class Render:
         self.grid(x, y, configs.GRID_COLOR)
 
     def grid(self, x, y, color):
-        if self.screen == None or not self.legal(x, y):
+        if self.screen is None or not self.legal(x, y):
             return
 
         area = pygame.Rect(self.pixelSize * x + self.boundSize, self.pixelSize * y + self.boundSize, self.pixelSize, self.pixelSize)

@@ -28,7 +28,7 @@ while True:
             if lose:
                 sys.exit()
 
-    if event == None:
+    if event is None:
         observe, reward, len, lose = game.moveByRelativeDirection(0)
         if lose:
             sys.exit()
