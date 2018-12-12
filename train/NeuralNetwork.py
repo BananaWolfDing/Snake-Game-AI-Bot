@@ -9,7 +9,10 @@ def newLayer(inputs, inSize, outSize, func = None):
     else:
         return func(tf.matmul(inputs, W) + b)
 
-def DeepLearning(learingRate = LearningConfigs.LEARNING_RATE, batch = LearningConfigs.BATCH):
+def DeepLearning(trainingData,
+                 learingRate = LearningConfigs.LEARNING_RATE,
+                 batch = LearningConfigs.BATCH):
+
     # x is the placeholder representing the observed snake state
     x = tf.placeholder(tf.int64, [None, 8])
 
@@ -33,3 +36,5 @@ def DeepLearning(learingRate = LearningConfigs.LEARNING_RATE, batch = LearningCo
     init = tf.initialize_all_variables()
     sess = tf.Session()
     sess.run(init)
+
+    steps = len(trainingData) / batch
