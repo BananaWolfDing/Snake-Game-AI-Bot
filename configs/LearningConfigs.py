@@ -10,6 +10,9 @@ AIM_SCORE = 500
 # Training Data Save and Load
 DATA_PATH = "../data/training_data.pkl"
 
-# Training parameter
+# Training Parameter
 LEARNING_RATE = 0.01
 BATCH = 500
+
+# Model Save and Load
+MODEL_PATH = "../dat/model"

@@ -38,3 +38,29 @@ def DeepLearning(trainingData,
     sess.run(init)
 
     steps = len(trainingData) / batch
+
+    for i in range(steps):
+        X = fetchObserve(x[i * batch: (i + 1) * batch])
+        Y = fetchDirection(d[i * batch: (i + 1) * batch])
+        sess.run(trainStep, feed_dict={x: X, d: Y})
+
+    saver = tf.train.Saver()
+    saver.save(sess, LearningConfigs.MODEL_PATH)
+
+
+def fetchObserve(lst):
+    res = []
+    for flatList in lst:
+        for move in flatList:
+            res.append(move[0])
+
+    return res
+
+
+def fetchDirection(lst):
+    dir = []
+    for flatList in lst:
+        for move in flatList:
+            dir.append(move[1])
+
+    return dir
