@@ -27,7 +27,7 @@ class ERM:
                 movement = random.randint(-1, 1)
                 observer, reward, len, lose = game.moveByRelativeDirection(movement)
                 if not lose:
-                    cache.append([observer, self.oneHotMove(movement)])
+                    cache.append([observer, self.__oneHotMove(movement)])
                     score += reward
                 else:
                     break
@@ -40,7 +40,7 @@ class ERM:
         print("Training data ready!")
         return data
 
-    def oneHotMove(self, x):
+    def __oneHotMove(self, x):
         if x == -1:
             return [1, 0, 0]
         elif x == 0:
