@@ -1,9 +1,10 @@
 import tensorflow as tf
+import numpy as np
 from configs import LearningConfigs
 
 
 class NeuralNetwork:
-    def __init(self, learningRate = LearningConfigs.LEARNING_RATE):
+    def __init__(self, learningRate = LearningConfigs.LEARNING_RATE):
         self.x = tf.placeholder(tf.int64, [None, 8])
         self.d = tf.placeholder(tf.float32, [None, 3])
 
@@ -12,9 +13,13 @@ class NeuralNetwork:
 
         self.p = newLayer(self.h2, 16, 3)
 
-        self.loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=self.d, logits=self.p))
+        self.loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels = self.d, logits = self.p))
 
         self.trainStep = tf.train.GradientDescentOptimizer(learningRate).minimize(self.loss)
+
+    def predict(self, observe):
+        pred = self.sess.run(self.p, feed_dict = {self.x: observe})
+        return np.argmax(pred)
 
     def train(self, trainingData, batch = LearningConfigs.BATCH):
         init = tf.initialize_all_variables()
@@ -32,6 +37,11 @@ class NeuralNetwork:
         saver = tf.train.Saver()
         saver.save(self.sess, LearningConfigs.MODEL_PATH)
 
+    def loadModel(self):
+        saver = tf.train.Saver()
+
+        with tf.Session() as session:
+            saver.restore(session, LearningConfigs.MODEL_PATH)
 
 def newLayer(inputs, inSize, outSize, func = None):
     W = tf.Variable(tf.random_normal([inSize, outSize]))

@@ -2,6 +2,7 @@ from configs import configs
 
 stdMove = [[0, -1], [1, 0], [0, 1], [-1, 0]]
 
+
 class Observer:
     def __init__(self, snake, food, width = configs.WIDTH, height = configs.HEIGHT):
         self.snake = snake
