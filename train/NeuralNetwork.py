@@ -19,7 +19,7 @@ class NeuralNetwork:
 
     def predict(self, observe):
         pred = self.sess.run(self.p, feed_dict = {self.x: observe})
-        return np.argmax(pred)
+        return np.argmax(pred) - 1
 
     def train(self, trainingData, batch = LearningConfigs.BATCH):
         init = tf.initialize_all_variables()
