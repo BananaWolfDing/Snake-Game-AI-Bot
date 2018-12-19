@@ -61,4 +61,4 @@ class Observer:
         return step
 
     def observe(self):
-        return [self.foodDist(), self.wallDist(), self.selfDist()]
+        return self.foodDist() + self.wallDist() + self.selfDist()
