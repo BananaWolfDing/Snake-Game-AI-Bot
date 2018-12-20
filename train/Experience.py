@@ -27,7 +27,7 @@ class ERM:
 
             while True:
                 movement = random.randint(-1, 1)
-                observer, reward, len, lose = game.moveByRelativeDirection(movement)
+                observer, reward, length, lose = game.moveByRelativeDirection(movement)
                 if not lose:
                     cache.append([observer, self.__oneHotMove(movement)])
                     score += reward

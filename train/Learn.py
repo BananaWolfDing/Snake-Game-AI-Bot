@@ -10,6 +10,8 @@ def test(nn):
     dirc = 0
     while True:
         observe, reward, length, lose = game.moveByRelativeDirection(dirc)
+        print("[Ding]: dirc = {:d}, len = {:d}".format(dirc, length))
+        print(observe)
         if not lose:
             dirc = nn.predict(observe)
         else:

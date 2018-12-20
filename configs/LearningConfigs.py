@@ -1,11 +1,11 @@
 # Game Reward
-ALIVE = 1
+ALIVE = 0
 EAT_FOOD = 10
-TO_FOOD = 1
+TO_FOOD = 2
 
 # Experience Replay Mechanism
-SAMPLE_SIZE = 5000
-AIM_SCORE = 500
+SAMPLE_SIZE = 10000
+AIM_SCORE = 300
 
 # Training Data Save and Load
 DATA_PATH = "../data/training_data.pkl"
