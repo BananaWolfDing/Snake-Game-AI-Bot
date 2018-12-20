@@ -15,4 +15,4 @@ LEARNING_RATE = 0.01
 BATCH = 500
 
 # Model Save and Load
-MODEL_PATH = "../dat/model"
+MODEL_PATH = "../data/model"

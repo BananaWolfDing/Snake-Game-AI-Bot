@@ -8,13 +8,12 @@ def test(nn):
     game = Game()
 
     dirc = 0
-    score = 0
     while True:
-        observe, reward, len, lose = game.moveByRelativeDirection(dirc)
+        observe, reward, length, lose = game.moveByRelativeDirection(dirc)
         if not lose:
             dirc = nn.predict(observe)
         else:
-            return len
+            return length
 
 
 nn = NeuralNetwork()

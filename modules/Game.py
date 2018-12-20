@@ -56,6 +56,6 @@ class Game:
 
         if res:
             observe = self.observer.observe()
-            return observe, reward, len, False
+            return observe, reward, self.snake.length(), False
         else:
-            return None, None, len, True
+            return None, None, self.snake.length(), True

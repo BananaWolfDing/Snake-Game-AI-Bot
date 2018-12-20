@@ -1,5 +1,6 @@
 import random
 import pickle
+import os
 from configs import LearningConfigs
 from modules.Game import Game
 
@@ -9,8 +10,9 @@ class ERM:
             pickle.dump(data, output, pickle.HIGHEST_PROTOCOL)
 
     def loadData(self, path = LearningConfigs.DATA_PATH):
-        with open(path, 'rb') as input:
-            return pickle.load(input)
+        if os.path.getsize(path) > 0:
+            with open(path, 'rb') as input:
+                return pickle.load(input)
 
     def generateTrainingData(self, size = LearningConfigs.SAMPLE_SIZE, aim = LearningConfigs.AIM_SCORE):
         print("Begin generating training data...")

@@ -5,7 +5,7 @@ from configs import LearningConfigs
 
 class NeuralNetwork:
     def __init__(self, learningRate = LearningConfigs.LEARNING_RATE):
-        self.x = tf.placeholder(tf.int64, [None, 8])
+        self.x = tf.placeholder(tf.float32, [None, 8])
         self.d = tf.placeholder(tf.float32, [None, 3])
 
         self.h1 = newLayer(self.x, 8, 16, tf.nn.relu)
@@ -18,15 +18,15 @@ class NeuralNetwork:
         self.trainStep = tf.train.GradientDescentOptimizer(learningRate).minimize(self.loss)
 
     def predict(self, observe):
-        pred = self.sess.run(self.p, feed_dict = {self.x: observe})
-        return np.argmax(pred) - 1
+        pred = self.sess.run(self.p, feed_dict = {self.x: [observe]})
+        return np.argmax(pred[0]) - 1
 
     def train(self, trainingData, batch = LearningConfigs.BATCH):
-        init = tf.initialize_all_variables()
+        init = tf.global_variables_initializer()
         self.sess = tf.Session()
         self.sess.run(init)
 
-        steps = len(trainingData) / batch
+        steps = len(trainingData) // batch
 
         for i in range(steps):
             X = fetchObserve(trainingData[i * batch: (i + 1) * batch])
@@ -55,8 +55,8 @@ def newLayer(inputs, inSize, outSize, func = None):
 def fetchObserve(lst):
     res = []
     for flatList in lst:
-        for move in flatList:
-            res.append(move[0])
+        for moves in flatList[0]:
+            res.append(moves[0])
 
     return res
 
@@ -64,7 +64,7 @@ def fetchObserve(lst):
 def fetchDirection(lst):
     dir = []
     for flatList in lst:
-        for move in flatList:
-            dir.append(move[1])
+        for moves in flatList[0]:
+            dir.append(moves[1])
 
     return dir
