@@ -1,1 +1,1 @@
-# Reimplement-Snake-Game-AI-Bot
+# Snake-Game-AI-Bot
